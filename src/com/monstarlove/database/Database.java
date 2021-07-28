@@ -1,6 +1,7 @@
 package com.monstarlove.database;
 
 import com.monstarlove.config.FileConfig;
+import com.monstarlove.utils.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -11,6 +12,7 @@ import java.util.List;
 
 /**
  * Created by Samuel Amador
+ * Supports Create, Delete
  */
 public class Database {
 
@@ -33,12 +35,8 @@ public class Database {
     public void init() {
         try {
             this.modelName = this.model.getClass().getSimpleName();
-            this.factory = new Configuration()
-                    .configure(FileConfig.HIBERNATE_FILE)
-                    .addAnnotatedClass(this.model.getClass())
-                    .buildSessionFactory();
-            this.session = this.factory.getCurrentSession();
-            this.transaction = session.beginTransaction();
+            this.session = HibernateUtils.buildSession();
+            this.transaction = this.session.beginTransaction();
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,28 +50,6 @@ public class Database {
             if (this.transaction != null) {
                 this.transaction.rollback();
             }
-        } finally {
-            this.factory.close();
-        }
-    }
-
-    public List<Object> find(int id) {
-        return this.getResult();
-    }
-
-    private List<Object> getResult() {
-        try {
-            String hql = "FROM " + this.modelName;
-            Query query = session.createQuery(hql);
-            List<Object> result = query.list();
-            this.session.getTransaction().commit();
-            return result;
-        } catch(Exception e) {
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
-            e.printStackTrace();
-            return null;
         } finally {
             this.factory.close();
         }

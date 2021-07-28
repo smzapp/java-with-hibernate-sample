@@ -7,12 +7,16 @@ import javax.persistence.*;
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private int id;
 
     @Column(name = "name")
     private String name;
+
+    public Category() {
+        super();
+    }
 
     public Category(String name) {
         this.name = name;
