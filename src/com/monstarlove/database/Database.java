@@ -7,6 +7,8 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
+import java.util.List;
+
 /**
  * Created by Samuel Amador
  */
@@ -16,6 +18,7 @@ public class Database {
     private Session session;
     private Transaction transaction = null;
     private Object model;
+    private String modelName;
 
     public Database(){
         super();
@@ -29,6 +32,7 @@ public class Database {
 
     public void init() {
         try {
+            this.modelName = this.model.getClass().getSimpleName();
             this.factory = new Configuration()
                     .configure(FileConfig.HIBERNATE_FILE)
                     .addAnnotatedClass(this.model.getClass())
@@ -53,9 +57,31 @@ public class Database {
         }
     }
 
+    public List<Object> find(int id) {
+        return this.getResult();
+    }
+
+    private List<Object> getResult() {
+        try {
+            String hql = "FROM " + this.modelName;
+            Query query = session.createQuery(hql);
+            List<Object> result = query.list();
+            this.session.getTransaction().commit();
+            return result;
+        } catch(Exception e) {
+            if (this.transaction != null) {
+                this.transaction.rollback();
+            }
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.factory.close();
+        }
+    }
+
     public int delete(int id) {
         try {
-            String hql = "delete from " + this.model.getClass().getSimpleName() + " where id = :id";
+            String hql = "delete from " + this.modelName + " where id = :id";
             Query query = session.createQuery(hql);
             query.setParameter("id", id);
             int result = query.executeUpdate();
