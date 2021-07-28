@@ -1,4 +1,4 @@
-package com.monstarlove.entity;
+package com.monstarlove.entities;
 
 import javax.persistence.*;
 

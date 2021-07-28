@@ -1,4 +1,4 @@
-package com.monstarlove.entity;
+package com.monstarlove.entities;
 
 import javax.persistence.*;
 
@@ -19,6 +19,10 @@ public class Customer {
 
     @Column(name = "contact_no")
     private String contactNo;
+
+    public Customer() {
+        super();
+    }
 
     public Customer(String name, String email, String contactNo) {
         this.name = name;
