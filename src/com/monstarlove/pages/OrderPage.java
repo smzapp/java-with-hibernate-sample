@@ -35,6 +35,9 @@ public class OrderPage {
                 order.displayAll();
                 break;
             case 5:
+                order.searchByStatus();
+                break;
+            case 6:
                 Main.chooseAction();
                 gotoMain = true;
                 break;
@@ -49,6 +52,7 @@ public class OrderPage {
         System.out.println("2 - Update Order status");
         System.out.println("3 - Delete an Order");
         System.out.println("4 - View orders");
-        System.out.println("5 - Go Back to Pages");
+        System.out.println("5 - Search Order by Status");
+        System.out.println("6 - Go Back to Pages");
     }
 }

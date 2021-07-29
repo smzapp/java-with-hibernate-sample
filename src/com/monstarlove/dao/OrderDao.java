@@ -4,7 +4,6 @@ import com.monstarlove.database.Database;
 import com.monstarlove.entities.Customer;
 import com.monstarlove.entities.Order;
 import com.monstarlove.entities.Product;
-import com.monstarlove.pages.OrderPage;
 import com.monstarlove.utils.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -20,6 +19,7 @@ public class OrderDao {
     private Session session;
     private Product product = new Product();
     private Customer customer = new Customer();
+    private String searchInput = "";
 
     public void addOrder() {
         this.prodao.displayAll();
@@ -76,24 +76,53 @@ public class OrderDao {
         }
     }
 
+    public void searchByStatus() {
+        System.out.println("\nSearch Order By Status: ");
+        String status = scanner.nextLine();
+        this.setSearchInput(status);
+        this.displayAll();
+    }
+
+    public String getSearchInput() {
+        return searchInput;
+    }
+
+    public void setSearchInput(String searchInput) {
+        this.searchInput = searchInput;
+    }
 
     public void displayAll() {
         List<Order> order = this.getResult();
-        System.out.println("----- All Orders ----- ");
-        for (int i=0; i < order.size(); i++) {
-            System.out.print(order.get(i).getId() + " | ");
-            System.out.print(order.get(i).getProduct().getName() + " | ");
-            System.out.print(order.get(i).getStatus() + " | ");
-            System.out.print(order.get(i).getTotal() + "\n");
+        if (this.getSearchInput().isEmpty()) {
+            System.out.println("----- Orders Results ----- ");
+        } else {
+            System.out.println("******** Search Results Found ***********");
+        }
+        if (order.size() > 0) {
+            for (int i=0; i < order.size(); i++) {
+                System.out.print(order.get(i).getId() + " | ");
+                System.out.print(order.get(i).getProduct().getName() + " | ");
+                System.out.print(order.get(i).getStatus() + " | ");
+                System.out.print(order.get(i).getTotal() + "\n");
+            }
+        } else {
+            System.out.println("No orders found.");
         }
     }
 
+
     public List<Order> getResult() {
         try {
-            String hql = "FROM Order";
             session = HibernateUtils.buildSession();
             session.beginTransaction();
+            String hql = "FROM Order";
+            if (!this.getSearchInput().isEmpty()) {
+                hql = "FROM Order where status=:status";
+            }
             Query query = session.createQuery(hql);
+            if (!this.getSearchInput().isEmpty()) {
+                query.setParameter("status", this.getSearchInput());
+            }
             List<Order> result = query.list();
             this.session.getTransaction().commit();
             return result;
