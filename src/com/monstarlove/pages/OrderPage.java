@@ -18,6 +18,7 @@ public class OrderPage {
         Scanner scanner = new Scanner(System.in);
         OrderDao order = new OrderDao();
         showOptions();
+        boolean gotoMain = false;
         System.out.println("\n\nEnter your choice: ");
         int input = scanner.nextInt();
         switch (input) {
@@ -27,13 +28,17 @@ public class OrderPage {
             case 2:
                 break;
             case 3:
+                order.deleteOrder();
                 break;
             case 4:
                 break;
             case 5:
                 Main.chooseAction();
+                gotoMain = true;
                 break;
         }
+        if (!gotoMain)
+            OrderPage.showSwitch();
     }
     public static void showOptions()
     {

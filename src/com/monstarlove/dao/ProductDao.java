@@ -38,7 +38,6 @@ public class ProductDao {
         db.insert();
         System.out.println("Successfully added!\n");
         scanner.nextLine();
-        ProductPage.showSwitch();
     }
 
     public void displayAll() {

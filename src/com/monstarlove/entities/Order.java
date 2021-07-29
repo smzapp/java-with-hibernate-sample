@@ -11,12 +11,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "customer_id")
-    private int customerId;
-
-    @Column(name = "product_id")
-    private int productId;
-
     @Column(name = "status")
     private String status;
 
@@ -26,16 +20,22 @@ public class Order {
     @Column(name = "total")
     private int total;
 
+//    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+//            CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
     public Order(){
         super();
     }
 
-    public Order(int customerId, int productId, String status, String dateDelivered, int total) {
-        this.customerId = customerId;
-        this.productId = productId;
+    public Order(String status) {
         this.status = status;
-        this.dateDelivered = dateDelivered;
-        this.total = total;
     }
 
     public int getId() {
@@ -44,22 +44,6 @@ public class Order {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
     }
 
     public String getStatus() {
@@ -84,5 +68,21 @@ public class Order {
 
     public void setTotal(int total) {
         this.total = total;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

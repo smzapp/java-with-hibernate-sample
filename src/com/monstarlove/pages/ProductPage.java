@@ -16,22 +16,24 @@ public class ProductPage {
     {
         Scanner scanner = new Scanner(System.in);
         ProductDao prod = new ProductDao();
+        boolean gotoMain = false;
         showOptions();
         System.out.println("\n\nEnter your choice: ");
         int input = scanner.nextInt();
         switch (input) {
             case 1:
                 prod.addProduct();
-                showSwitch();
                 break;
             case 2:
                 prod.displayAll();
-                showSwitch();
                 break;
             case 3:
                 Main.chooseAction();
+                gotoMain = true;
                 break;
         }
+        if (!gotoMain)
+           ProductPage.showSwitch();
     }
 
     public static void showOptions()

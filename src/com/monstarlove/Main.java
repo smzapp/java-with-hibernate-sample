@@ -44,8 +44,8 @@ public class Main {
     {
         Scanner scanner = new Scanner(System.in);
         boolean quit = false;
-//        new OrderPage();
-        new CustomerPage();
+        new OrderPage();
+//        new CustomerPage();
 //        new ProductPage();
 //        options();
 //        while (!quit) {

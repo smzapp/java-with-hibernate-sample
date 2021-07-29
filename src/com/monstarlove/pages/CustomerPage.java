@@ -17,6 +17,7 @@ public class CustomerPage {
     {
         Scanner scanner = new Scanner(System.in);
         CustomerDao cust = new CustomerDao();
+        boolean gotoMain = false;
         showOptions();
         System.out.println("\n\nEnter your choice: ");
         int input = scanner.nextInt();
@@ -32,9 +33,11 @@ public class CustomerPage {
                 break;
             case 4:
                 Main.chooseAction();
+                gotoMain = true;
                 break;
         }
-        CustomerPage.showSwitch();
+        if (!gotoMain)
+            CustomerPage.showSwitch();
     }
     public static void showOptions()
     {
