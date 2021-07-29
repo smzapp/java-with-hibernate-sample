@@ -32,6 +32,9 @@ public class CustomerPage {
                 cust.deleteCustomer();
                 break;
             case 4:
+                cust.displayAll();
+                break;
+            case 5:
                 Main.chooseAction();
                 gotoMain = true;
                 break;
@@ -45,6 +48,7 @@ public class CustomerPage {
         System.out.println("1 - Add Customer");
         System.out.println("2 - Update Customer Information");
         System.out.println("3 - Delete Customer");
-        System.out.println("4 - Go Back to Pages");
+        System.out.println("4 - Display all customers");
+        System.out.println("5 - Go Back to Pages");
     }
 }

@@ -44,33 +44,34 @@ public class Main {
     {
         Scanner scanner = new Scanner(System.in);
         boolean quit = false;
-        new OrderPage();
-//        new CustomerPage();
-//        new ProductPage();
-//        options();
-//        while (!quit) {
-//            System.out.println("Enter your choice: ");
-//            int input = scanner.nextInt();
-//            switch (input) {
-//                case 1:
-//                    new ProductPage();
-//                    break;
-//                case 2:
-//                    new CustomerPage();
-//                    break;
-//                case 4:
-//                    quit = true;
-//                    break;
-//            }
-//        }
+        options();
+        while (!quit) {
+            System.out.println("Enter your choice: ");
+            int input = scanner.nextInt();
+            switch (input) {
+                case 1:
+                    new ProductPage();
+                    break;
+                case 2:
+                    new CustomerPage();
+                    break;
+                case 3:
+                    new OrderPage();
+                    break;
+                case 4:
+                    quit = true;
+                    break;
+            }
+        }
+        System.out.println("Thank you for coming... :D");
     }
 
     public static void options()
     {
         System.out.println("--------- Pages ------");
         System.out.println("1 - Products");
-        System.out.println("2 - Orders");
-        System.out.println("3 - Customers");
+        System.out.println("2 - Customers");
+        System.out.println("3 - Orders");
         System.out.println("4 - Quit");
     }
 }

@@ -26,11 +26,13 @@ public class OrderPage {
                 order.addOrder();
                 break;
             case 2:
+                order.updateStatus();
                 break;
             case 3:
                 order.deleteOrder();
                 break;
             case 4:
+                order.displayAll();
                 break;
             case 5:
                 Main.chooseAction();
@@ -46,7 +48,7 @@ public class OrderPage {
         System.out.println("1 - Order a product");
         System.out.println("2 - Update Order status");
         System.out.println("3 - Delete an Order");
-        System.out.println("4 - View an order");
+        System.out.println("4 - View orders");
         System.out.println("5 - Go Back to Pages");
     }
 }

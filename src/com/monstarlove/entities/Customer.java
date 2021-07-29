@@ -1,6 +1,7 @@
 package com.monstarlove.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "customers")

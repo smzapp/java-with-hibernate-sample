@@ -43,11 +43,31 @@ public class OrderDao {
         System.out.println("Successfully added an order.");
     }
 
+    public void updateStatus() {
+        this.displayAll();
+        System.out.println("\n\nEnter Order ID to update: ");
+        int input = scanner.nextInt();
+        System.out.println("\n---------- Update Order Status --------");
+        scanner.nextLine();
+        System.out.println("Change Status as: ");
+        String status = scanner.nextLine();
+        try {
+            session = HibernateUtils.buildSession();
+            session.beginTransaction();
+            Order order = session.get(Order.class, input);
+            order.setStatus(status);
+            session.getTransaction().commit();
+            System.out.println("Updated status successfully!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void deleteOrder() {
         this.displayAll();
         System.out.println("\nSelect ORDER ID to delete: ");
         int input = scanner.nextInt();
-        Database db = new Database(new Customer());
+        Database db = new Database(new Order());
         int result = db.delete(input);
         if (result > 0) {
             System.out.println("Successfully deleted!");
