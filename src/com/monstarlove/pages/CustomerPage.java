@@ -1,13 +1,14 @@
 package com.monstarlove.pages;
 
 import com.monstarlove.Main;
+import com.monstarlove.dao.CustomerDao;
 import com.monstarlove.dao.ProductDao;
 
 import java.util.Scanner;
 
-public class ProductPage {
+public class CustomerPage {
 
-    public ProductPage() {
+    public CustomerPage() {
         super();
         showSwitch();
     }
@@ -15,30 +16,32 @@ public class ProductPage {
     public static void showSwitch()
     {
         Scanner scanner = new Scanner(System.in);
-        ProductDao prod = new ProductDao();
+        CustomerDao cust = new CustomerDao();
         showOptions();
         System.out.println("\n\nEnter your choice: ");
         int input = scanner.nextInt();
         switch (input) {
             case 1:
-                prod.addProduct();
-                showSwitch();
+                cust.addCustomer();
                 break;
             case 2:
-                prod.displayAll();
-                showSwitch();
+                cust.update();
                 break;
             case 3:
+                cust.deleteCustomer();
+                break;
+            case 4:
                 Main.chooseAction();
                 break;
         }
+        CustomerPage.showSwitch();
     }
-
     public static void showOptions()
     {
-        System.out.println("\n----------- Product Page -----------");
-        System.out.println("1 - Add product");
-        System.out.println("2 - List all products");
-        System.out.println("3 - Back to Pages");
+        System.out.println("\n----------- Customer Page -----------");
+        System.out.println("1 - Add Customer");
+        System.out.println("2 - Update Customer Information");
+        System.out.println("3 - Delete Customer");
+        System.out.println("4 - Go Back to Pages");
     }
 }

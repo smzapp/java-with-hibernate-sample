@@ -1,14 +1,12 @@
 package com.monstarlove;
 
 
-import com.monstarlove.dao.CategoryDao;
 import com.monstarlove.database.Database;
-import com.monstarlove.entities.Category;
 import com.monstarlove.entities.Customer;
+import com.monstarlove.pages.CustomerPage;
+import com.monstarlove.pages.OrderPage;
 import com.monstarlove.pages.ProductPage;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -46,7 +44,9 @@ public class Main {
     {
         Scanner scanner = new Scanner(System.in);
         boolean quit = false;
-        new ProductPage();
+//        new OrderPage();
+        new CustomerPage();
+//        new ProductPage();
 //        options();
 //        while (!quit) {
 //            System.out.println("Enter your choice: ");
@@ -56,7 +56,7 @@ public class Main {
 //                    new ProductPage();
 //                    break;
 //                case 2:
-//                    System.out.println("orders");
+//                    new CustomerPage();
 //                    break;
 //                case 4:
 //                    quit = true;

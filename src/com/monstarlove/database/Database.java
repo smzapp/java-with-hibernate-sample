@@ -50,8 +50,7 @@ public class Database {
             if (this.transaction != null) {
                 this.transaction.rollback();
             }
-        } finally {
-            this.factory.close();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -69,8 +68,6 @@ public class Database {
             }
             e.printStackTrace();
             return 0;
-        } finally {
-            this.factory.close();
         }
     }
 
